@@ -1,0 +1,40 @@
+directive sample 5.0 100
+directive simulation deterministic
+ 
+rate k = 1;  
+\\Cdk
+init x0 2 |
+init x1 0 |
+init x2 1 |
+\\Wee1 
+init s0 1 |
+init s1 0 |
+init s2 2 |
+\\Cdc25
+init r0 2 |
+init r1 0 |
+init r2 1 |
+\\PP2A 
+init y0 1 |
+init y1 0 |
+init y2 2 |
+ 
+x0 + s0 ->{k} s0 + x1 |
+x1 + s0 ->{k} s0 + x2 |
+x2 + r0 ->{k} r0 + x1 |
+x1 + r0 ->{k} r0 + x0 |
+ 
+s2 + y0 ->{k} y0 + s1 |
+s1 + y0 ->{k} y0 + s0 |
+s0 + x0 ->{k} x0 + s1 |
+s1 + x0 ->{k} x0 + s2 |
+ 
+r2 + x0 ->{k} x0 + r1 |
+r1 + x0 ->{k} x0 + r0 |
+r0 + y0 ->{k} y0 + r1 |
+r1 + y0 ->{k} y0 + r2 |
+ 
+y2 + y0 ->{k} y0 + y1 |
+y1 + y0 ->{k} y0 + y0 |
+y0 + x0 ->{k} x0 + y1 |
+y1 + x0 ->{k} x0 + y2
